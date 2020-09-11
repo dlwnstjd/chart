@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>도우넛 그래프 그리기</title>
+<script type="text/javascript" 
+	src="http://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+</head>
+<body>
+<div id="container" style="width:75%;">
+	<canvas id="canvas"></canvas>
+</div>
+<script>
+	var MONTHS = ['1월','2월','3월','4월','5월','6월','7월','8월',
+				'9월','10월','11월','12월'];
+	window.chartColors={
+			red :'rgb(255,99,132)',	//#FF....
+			orange :'rgb(255,159,64)',
+			yellow :'rgb(255,205,86)',
+			green :'rgb(75,192,192)',
+			blue :'rgb(54,162,235)',
+			purple :'rgb(153,102,255)',
+			gray :'rgb(201,203,207)',
+	};
+	var randomScalingFactor = function(){
+		return Math.round(Math.random()*100);
+	}
+	var config ={
+			type: 'doughnut',
+			data:{
+				datasets:[{
+					data:[
+						//0부터 100까지의 임의의 값
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+					backgroundColor:[
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+						"#FF0000","#00FF00","#0000FF",
+						"#FFFF00","#00FFFF","#FF00FF",
+						"#EEEEEE"
+					],
+					label: '도넛 그래프'
+				}],
+				labels:MONTHS					
+				},
+					options: {
+						responsive: true,	//반응형 웹 설정
+						legend: {position: 'top',},
+						title:{
+							display: true,
+							text: '도넛 그래프 연습'
+						},
+						animation:{
+							animateScale: true,
+							animateRotate: true
+						}
+			}
+	};
+	window.onload = function(){
+		var ctx =
+			document.getElementById('canvas').getContext('2d');
+		window.myBar = new Chart(ctx,config);
+	}
+</script>
+</body>
+</html>

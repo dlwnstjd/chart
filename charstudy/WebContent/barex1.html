@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>막대그래프 그리기</title>
+<script type="text/javascript" 
+	src="http://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+<style type="text/css">
+	canvas {	/*글씨가 선택되지 않도록*/
+		-moz-user-select: none;	/*파이어폭스 브라우저*/
+		-webkit-user-select: none;	/*사파리 브라우저*/
+		-ms-user-select: none;	/*익스플로러 브라우저*/
+		user-select: none;	/*표준 브라우저*/
+	}
+</style>
+</head>
+<body>
+<div id="contatiner" style="width:75%;">
+	<canvas id="canvas"></canvas>
+</div>
+<script type="text/javascript">
+	var MONTHS=["1월","2월","3월","4월","5월","6월","7월","8월",
+				"9월","10월","11월","12월"]
+	var barChartData = {
+			labels: MONTHS,
+			datasets: [{	//그래프로 표시될 내용.
+				label: '영업부실적',
+				backgroundColor: "#FF90FF",
+				borderColor: "#FF90FF",
+				borderWidth: 1,
+				data:[10,15,25,55,-25,65,30,55,28,43,68]
+			},{
+				label: '총무부실적',
+				backgroundColor: "#0000FF",
+				borderColor: "#0000FF",
+				borderWidth: 1,
+				data:[1,5,5,15,-5,25,13,11,2,4,8]
+			}]
+	}
+	window.onload=function(){
+		//canvas 선택.
+		//ctx: 그래프를 그리기 위한 도구
+		var ctx = document.getElementById("canvas").getContext("2d")
+		//new Chart: 그래프 
+		window.myBar = new Chart(ctx,{	//그래프 내용
+			type: 'bar',	//막대 그래프
+			data: barChartData,	//데이터
+			options: {
+				responsive: true,	//반응형 웹 형태
+				legend: {position: 'top'},	//범례의 위치 지정
+				title:{
+					display: true,
+					text: '막대 그래드 연습'
+				}
+			}
+		})
+	}
+</script>
+</body>
+</html>

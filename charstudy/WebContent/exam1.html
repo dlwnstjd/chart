@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+	canvas {	/*글씨가 선택되지 않도록*/
+		-moz-user-select: none;	/*파이어폭스 브라우저*/
+		-webkit-user-select: none;	/*사파리 브라우저*/
+		-ms-user-select: none;	/*익스플로러 브라우저*/
+		user-select: none;	/*표준 브라우저*/
+	}
+</style>
+<script type="text/javascript" 
+	src="http://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+<script>
+	var MONTHS = ['1월','2월','3월','4월','5월','6월','7월','8월',
+			'9월','10월','11월','12월'];
+	window.chartColors={
+		red :'rgb(255,99,132)',	//#FF....
+		orange :'rgb(255,159,64)',
+		yellow :'rgb(255,205,86)',
+		green :'rgb(75,192,192)',
+		blue :'rgb(54,162,235)',
+		purple :'rgb(153,102,255)',
+		gray :'rgb(201,203,207)'
+	};
+	var randomScalingFactor = function(){
+	return Math.round(Math.random()*100);
+	}	
+	
+	function graphprint(type){	
+	var name=(type=='pie'?'파이그래프':'도넛그래프');
+	var config ={
+		type: type,
+		data:{
+			datasets:[{
+				data:[
+					//0부터 100까지의 임의의 값
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				],
+				backgroundColor:[
+					window.chartColors.red,
+					window.chartColors.orange,
+					window.chartColors.yellow,
+					window.chartColors.green,
+					window.chartColors.blue,
+					"#FF0000","#00FF00","#0000FF",
+					"#FFFF00","#00FFFF","#FF00FF",
+					"#EEEEEE"
+				],
+				label: '도넛 그래프'
+			}],
+			labels:MONTHS					
+			},
+				options: {
+					responsive: true,	//반응형 웹 설정
+					legend: {position: 'top',},
+					title:{
+						display: true,
+						text: name + '연습'
+					},
+					animation:{
+						animateScale: true,
+						animateRotate: true
+					}
+		}
+	};
+	var ctx =
+		document.getElementById('canvas').getContext('2d');
+	window.myBar = new Chart(ctx,config);
+}
+
+</script>
+</head>
+<body>
+<input type="button" value="도넛그래프" onclick="graphprint('doughnut')">
+<input type="button" value="파이그래프" onclick="graphprint('pie')">
+<div id="container" style="width:75%;">
+	<canvas id="canvas"></canvas>
+</div>
+</body>
+</html>
